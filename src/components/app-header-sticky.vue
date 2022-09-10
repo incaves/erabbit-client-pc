@@ -15,29 +15,29 @@
 </template>
 
 <script>
-import AppHeaderNav from './app-header-nav'
-import { ref, onMounted } from 'vue'
+import AppHeaderNav from "./app-header-nav";
+import { ref, onMounted } from "vue";
 export default {
-  name: 'AppHeaderSticky',
+  name: "AppHeaderSticky",
   components: {
-    AppHeaderNav
+    AppHeaderNav,
   },
-  setup () {
+  setup() {
     // 记录y轴卷曲的高度
-    const y = ref(0)
+    const y = ref(0);
     // 当页面滚动时更新y的数据
     onMounted(() => {
       window.onscroll = () => {
         // 获取滚动的高度
-        const scrollTop = document.documentElement.scrollTop
-        y.value = scrollTop // 设置给y
-      }
-    })
+        const scrollTop = document.documentElement.scrollTop;
+        y.value = scrollTop; // 设置给y
+      };
+    });
     return {
-      y // 提供给模版使用
-    }
-  }
-}
+      y, // 提供给模版使用
+    };
+  },
+};
 </script>
 
 <style scoped lang="less">
@@ -51,8 +51,8 @@ export default {
   background-color: #fff;
   border-bottom: 1px solid #e4e4e4;
   // 隐藏
-  transform: translateY(-100%);
-  opacity: 0;
+  transform: translateY(-100%); // y轴 -100% 在页面之外
+  opacity: 0; // 透明度为0
   // 显示
   &.show {
     transform: none; // 去掉位移

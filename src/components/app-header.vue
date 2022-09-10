@@ -1,13 +1,16 @@
 <template>
   <header class="app-header">
     <div class="container">
+      <!-- Logo -->
       <h1 class="logo"><RouterLink to="/">小兔鲜</RouterLink></h1>
       <!-- 头部分类组件 -->
       <AppHeaderNav />
+      <!-- 搜素框 -->
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜" />
       </div>
+      <!-- 购物车图标 -->
       <div class="cart">
         <a class="curr" href="#">
           <i class="iconfont icon-cart"></i><em>2</em>
@@ -18,13 +21,13 @@
 </template>
 
 <script>
-import AppHeaderNav from './app-header-nav'
+import AppHeaderNav from "./app-header-nav";
 export default {
-  name: 'AppHeader',
+  name: "AppHeader",
   components: {
-    AppHeaderNav
-  }
-}
+    AppHeaderNav,
+  },
+};
 </script>
 
 <style scoped lang="less">

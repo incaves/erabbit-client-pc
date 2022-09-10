@@ -35,6 +35,7 @@
     <!-- 弹层 -->
     <div class="layer">
       <h4>
+        <!-- 根据品牌的id是独有的来进行切换 -->
         {{ currCategory && currCategory.id === "brand" ? "品牌" : "分类" }}推荐
         <small>根据您的购买或浏览记录推荐</small>
       </h4>
@@ -55,7 +56,9 @@
       <ul v-if="currCategory && currCategory.brands">
         <li class="brand" v-for="item in currCategory.brands" :key="item.id">
           <RouterLink to="/">
+            <!-- 图片 -->
             <img :src="item.picture" alt="" />
+            <!-- 内容 -->
             <div class="info">
               <p class="place">
                 <i class="iconfont icon-dingwei"></i>{{ item.place }}
@@ -71,57 +74,58 @@
 </template>
 
 <script>
-import { computed, reactive, ref } from 'vue'
-import { useStore } from 'vuex'
-import { findBrand } from '@/api/home'
+import { computed, reactive, ref } from "vue";
+import { useStore } from "vuex";
+import { findBrand } from "@/api/home";
 export default {
-  name: 'HomeCategory',
-  setup () {
-    const store = useStore() // 初始化Vuex
+  name: "HomeCategory",
+  setup() {
+    const store = useStore(); // 初始化Vuex
     // 使用的数据根据分类的数量
     // 九个分类 + 一个品牌
     // <品牌数据>
     const brand = reactive({
-      id: 'brand',
-      name: '品牌',
-      children: [{ id: 'brand-chilren', name: '品牌推荐' }],
-      brands: [] // 品牌列表
-    })
-    // <左侧分类数据>
+      id: "brand",
+      name: "品牌",
+      children: [{ id: "brand-chilren", name: "品牌推荐" }],
+      brands: [], // 品牌列表
+    });
+    // <左侧分类数据> 一共是九个
     const menuList = computed(() => {
       // 左侧分类只需要两个子分类,需要遍历截取下
       const list = store.state.category.list.map((item) => {
+        // 只截取两个子分类,其他的都还需要,需要保存下
         return {
           id: item.id, // 获取到id
           name: item.name, // 获取到name
           // 防止不存在的情况,判断下
           children: item.children && item.children.slice(0, 2), // 获取到children,但只截取两个
-          goods: item.goods // 获取到goods
-        }
-      })
-      list.push(brand) // 将品牌数据追加到list数组中(末尾)
-      return list
-    })
+          goods: item.goods, // 获取到goods
+        };
+      });
+      list.push(brand); // 将品牌数据追加到list数组中(末尾)
+      return list;
+    });
     // 弹层 -- 分类数据
-    const categoryId = ref(null) // 记录鼠标滑入那个分类的id
+    const categoryId = ref(null); // 记录鼠标滑入那个分类的id
     // 根据鼠标滑入的id获取对应的数据
     const currCategory = computed(() => {
       // 根据categoryId记录的id,向menuList找对应的数据
-      return menuList.value.find((item) => item.id === categoryId.value)
-    })
+      return menuList.value.find((item) => item.id === categoryId.value);
+    });
     // 弹层 -- 品牌数据
-    // 获取品牌数据
+    // 获取品牌独有的数据
     findBrand().then((res) => {
       // 把获取到品牌数据赋值给brand中的brands数组
-      brand.brands = res.result
-    })
+      brand.brands = res.result;
+    });
     return {
       menuList,
       categoryId,
-      currCategory
-    }
-  }
-}
+      currCategory,
+    };
+  },
+};
 </script>
 
 <style scoped lang="less">
