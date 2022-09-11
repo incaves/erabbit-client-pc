@@ -89,7 +89,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                     home-new.vue  --  新鲜好物
                     home-hot.vue  --  人气推荐
                     home-brand.vue -- 热门品牌
-                    home-goods.vue -- 单个商品(鼠标经过展示价格,小型)
+                    home-goods.vue -- 单个商品(每个商品)
                     home-product.vue -- 承载单个商品的容器
                     home-special.vue -- 最新专题
                     商品区域和最新专题没有做骨架屏效果,只做了数据懒加载和图片懒加载
@@ -116,8 +116,9 @@ xtx-more.vue 查看更多和负责跳转
 home-panel.vue 容器 标题 内容
 组成一个楼层面板
 <HomePanel title="标题" subTitle="副标题">
+    // 右侧插槽
     <template #right>
-      <!-- 查看更多 || 两个方框 -->
+      <!-- 查看更多 -->
       <XtxMore path="/"></XtxMore>
     </template>
     // 插槽
