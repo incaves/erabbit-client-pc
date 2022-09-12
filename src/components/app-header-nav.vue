@@ -4,7 +4,7 @@
     <li
       v-for="item in list"
       :key="item.id"
-      @mouseenter="show(item)"
+      @mousemove="show(item)"
       @mouseleave="hide(item)"
     >
       <!-- 一级分类 -->
@@ -29,33 +29,32 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
-  name: "AppHeaderNav",
-  setup() {
+  name: 'AppHeaderNav',
+  setup () {
     // 初始化Vuex
-    const store = useStore();
+    const store = useStore()
     // 获取分类数据
     const list = computed(() => {
-      return store.state.category.list;
-    });
+      return store.state.category.list
+    })
     // 显示二级分类(鼠标移入事件)
     const show = (item) => {
-      console.log(item.id);
-      store.commit("category/show", item.id);
-    };
+      store.commit('category/show', item.id)
+    }
     // 隐藏二级分类(鼠标移出事情)
     const hide = (item) => {
-      store.commit("category/hide", item.id);
-    };
+      store.commit('category/hide', item.id)
+    }
     return {
       list,
       show,
-      hide,
-    };
-  },
-};
+      hide
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">

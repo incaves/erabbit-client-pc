@@ -107,19 +107,22 @@
         opacity: 0;
       }
     }
-  }
-  // 面包屑切换动画
-  .fade-right-enter-to,
-  .fade-right-leave-from{
-    opacity: 1;
-    transform: none;
-  }
-  .fade-right-enter-active,
-  .fade-right-leave-active{
-    transition: all .5s;
-  }
-  .fade-right-enter-from,
-  .fade-right-leave-to{
-    opacity: 0;
-    transform: translate3d(20px,0,0);
-  }
+  }  
+// 面包屑切换动画---
+// 进入和离开时的动画
+.fade-right-enter-from,
+.fade-right-leave-to {
+  opacity: 0;
+  transform: translate3d(20px, 0, 0);
+}
+// 进入中和离开中时的动画
+.fade-right-enter-active,
+.fade-right-leave-active {
+  transition: all 0.5s;
+}
+// 进入后和离开后的动画
+.fade-right-enter-to,
+.fade-right-leave-from {
+  opacity: 1;
+  transform: none;
+}

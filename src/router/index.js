@@ -22,7 +22,13 @@ const routes = [
 // Vue3 = createRouter({})
 const router = createRouter({
   history: createWebHashHistory(), // hash
-  routes
+  routes,
+  // 路由进行跳转时,自动滚动到页面顶部
+  scrollBehavior () {
+    // Vue2 - x y
+    // Vue3 - left top
+    return { left: 0, top: 0 }
+  }
 })
 
 export default router
