@@ -37,7 +37,6 @@ export default {
     // 需要传递两个数据 DOM对象和API
     const target = ref(null) // 需要绑定
     const result = uselazyData(target, findHot) // 返回一个result的数组
-    console.log(result)
     return {
       goods: result, // 修改下 模版使用的是goods
       target

@@ -20,7 +20,7 @@
       <div class="box">
         <RouterLink class="cover" to="/">
           <!-- 左侧大图 -->
-          <img :src="cate.picture" alt="" />
+          <img v-lazyload="cate.picture" alt="" />
           <!-- 左侧内容 -->
           <strong class="label">
             <span>{{ cate.name }}馆</span>
