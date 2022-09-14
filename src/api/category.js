@@ -20,3 +20,11 @@ export const findTopCategory = (id) => {
 export const findSubCategoryFilter = (id) => {
   return request('/category/sub/filter', 'get', { id })
 }
+/**
+ * 获取二级分类下的商品
+ * @param {Object} params
+ * @returns
+ */
+export const findSubCategoryGoods = (params) => {
+  return request('/category/goods/temporary', 'post', params)
+}

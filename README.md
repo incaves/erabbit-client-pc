@@ -58,6 +58,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                 xtx-more.vue      -- 面板组件(右上角存在:"查看更多"的标题,公用一个组件,注意唯一不同的是跳转的页面不同)
                 xtx-bread.vue     -- 面包屑(函数式组件使用render函数渲染模版)
                 xtx-bread-item.vue -- 单个面包屑组件(参考ElementUi)
+                xtx-infinite-loading.vue -- 无限加载组件(有数据加载时展示 加载中..)(没有数据时 展示: 没有更多了..)
                 index.js          -- 注册全局插件(图片懒加载,批量注册组件)
     hooks          -- 全局方法(全局复用方法)
     router         -- 路由
@@ -80,6 +81,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                     goods-item.vue -- 单个商品组件
                     sub-bread.vue  -- 二级分类页面的面包屑组件
                     sub-filter.vue -- 二级分类筛选区域
+                    sub-sort.vue   -- 二级分类排序区域
             goods  -- 商品
             home   -- 首页
                 components

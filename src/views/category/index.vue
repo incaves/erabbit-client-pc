@@ -99,7 +99,7 @@ export default {
         // 这个route.params.id 可能是二级分类的id,和接口对不上
         // 根据路径来判断是不是一级分类(二级分类是/category/sub/..)
         // 需要判断下,必须是一级分类才定义次函数
-        if (newVal && `/categoru/${newVal}` === route.params.id) {
+        if (newVal && `/categoru/${newVal}` === route.path) {
           getSubList()
         }
       },
