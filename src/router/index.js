@@ -3,6 +3,7 @@ import TopCategory from '@/views/category'
 import SubCategory from '@/views/category/sub'
 const Layout = () => import('@/views/Layout')
 const Home = () => import('@/views/home/index')
+const Goods = () => import('@/views/goods/index')
 const routes = [
   // 一级路由容器
   {
@@ -14,7 +15,9 @@ const routes = [
       // 一级分类
       { path: '/category/:id', component: TopCategory },
       // 二级分类
-      { path: '/category/sub/:id', component: SubCategory }
+      { path: '/category/sub/:id', component: SubCategory },
+      // 商品详情
+      { path: '/product/:id', component: Goods }
     ]
   }
 ]

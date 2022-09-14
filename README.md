@@ -40,6 +40,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
         constants.js -- 定义一个常量数据和后台保持一致,这样不请求后台就能展示一级分类,不至于白屏
         category.js  -- 分类相关api请求
         home.js      -- 首页相关api请求
+        product.js   -- 商品详情相关api请求
     assets           -- 放置静态文件的目录
         images     -- 图片
         style      -- less预处理器脚本
@@ -83,6 +84,10 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                     sub-filter.vue -- 二级分类筛选区域
                     sub-sort.vue   -- 二级分类排序区域
             goods  -- 商品
+              index.vue -- 商品布局页面
+              components 
+                    goods-image.vue    -- 商品图片预览区域(左侧大图和右侧五个小图)
+                    goods-relevant.vue -- 商品推荐
             home   -- 首页
                 components
                     home-category.vue -- 首页左侧侧边栏
