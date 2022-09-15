@@ -6,9 +6,7 @@
         <XtxBreadItem to="/">首页</XtxBreadItem>
         <Transition name="fade-right" mode="out-in">
           <!-- 加transition和name属性,以及加上key属性关联ID才会创建和移除(才会执行动画) -->
-          <XtxBreadItem :key="topCategory.id">{{
-            topCategory.name
-          }}</XtxBreadItem>
+          <XtxBreadItem :key="topCategory.id">{{topCategory.name}}</XtxBreadItem>
         </Transition>
       </XtxBread>
       <!-- 轮播图 -->
@@ -36,11 +34,7 @@
         </div>
         <div class="body">
           <!-- 单个商品组件 -->
-          <GoodsItem
-            v-for="goods in sub.goods"
-            :key="goods.id"
-            :goods="goods"
-          />
+          <GoodsItem v-for="goods in sub.goods" :key="goods.id" :goods="goods" />
         </div>
       </div>
     </div>

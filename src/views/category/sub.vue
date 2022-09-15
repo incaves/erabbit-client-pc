@@ -16,11 +16,7 @@
             <GoodsItem :goods="item" />
           </li>
         </ul>
-        <XtxInfiniteLoading
-          :loading="loading"
-          :finished="finished"
-          @infinite="getData"
-        />
+        <XtxInfiniteLoading :loading="loading" :finished="finished" @infinite="getData" />
       </div>
     </div>
   </div>

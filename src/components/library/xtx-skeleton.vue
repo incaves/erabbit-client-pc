@@ -1,10 +1,6 @@
 <template>
   <!-- 盒子 -->
-  <div
-    class="xtx-skeleton"
-    :style="{ width, height }"
-    :class="{ shan: animated }"
-  >
+  <div class="xtx-skeleton" :style="{ width, height }" :class="{ shan: animated }">
     <!-- 伪元素 -->
     <div class="block" :style="{ backgroundColor: bg }"></div>
   </div>

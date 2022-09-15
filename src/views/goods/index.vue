@@ -3,12 +3,8 @@
     <div class="container">
       <!-- 面包屑 -->
       <XtxBread v-if="goods">
-        <XtxBreadItem :to="'/category/sub/' + goods.categories[1].id">{{
-          goods.categories[1].name
-        }}</XtxBreadItem>
-        <XtxBreadItem :to="'/category/' + goods.categories[0].id">{{
-          goods.categories[0].name
-        }}</XtxBreadItem>
+        <XtxBreadItem :to="'/category/sub/' + goods.categories[1].id">{{goods.categories[1].name}}</XtxBreadItem>
+        <XtxBreadItem :to="'/category/' + goods.categories[0].id">{{goods.categories[0].name}}</XtxBreadItem>
         <XtxBreadItem>{{ goods.name }}</XtxBreadItem>
       </XtxBread>
       <!-- 商品信息 -->

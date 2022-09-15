@@ -5,14 +5,9 @@
       <div class="head">品牌：</div>
       <div class="body">
         <!-- 品牌 第一行-->
-        <a
-          href="javascript:;"
-          v-for="item in filterData.brands"
-          :class="{ active: filterData.brands.selectedBrand === item.id }"
-          :key="item.id"
-          @click="ChangeBrand(item.id)"
-          >{{ item.name }}</a
-        >
+        <a href="javascript:;" v-for="item in filterData.brands" :class="{ active: filterData.brands.selectedBrand === item.id }" :key="item.id" @click="ChangeBrand(item.id)">
+          {{ item.name }}
+        </a>
       </div>
     </div>
     <!-- 属性 -->
@@ -21,14 +16,7 @@
       <div class="head">{{ item.name }}</div>
       <div class="body">
         <!-- 销售属性 -->
-        <a
-          href="javascript:;"
-          :class="{ active: item.selectedAttr === sub.id }"
-          @click="chengeProps(item, sub.id)"
-          v-for="sub in item.properties"
-          :key="sub.id"
-          >{{ sub.name }}</a
-        >
+        <a href="javascript:;" :class="{ active: item.selectedAttr === sub.id }" @click="chengeProps(item, sub.id)" v-for="sub in item.properties" :key="sub.id">{{ sub.name }}</a>
       </div>
     </div>
   </div>

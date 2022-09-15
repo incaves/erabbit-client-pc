@@ -5,18 +5,8 @@
     <template v-slot:right>
       <!-- 禁用图标,index = 0 表示在第一页 -->
       <!-- 禁用图标,index = 1 表示在第二页 -->
-      <a
-        :class="{ disabled: index == 0 }"
-        @click="toggle(-1)"
-        href="javascript:;"
-        class="iconfont icon-angle-left prev"
-      ></a>
-      <a
-        :class="{ disabled: index == 1 }"
-        @click="toggle(1)"
-        href="javascript:;"
-        class="iconfont icon-angle-right next"
-      ></a>
+      <a :class="{ disabled: index == 0 }" @click="toggle(-1)" href="javascript:;" class="iconfont icon-angle-left prev"></a>
+      <a :class="{ disabled: index == 1 }" @click="toggle(1)" href="javascript:;" class="iconfont icon-angle-right next"></a>
     </template>
     <!-- 渲染区域(默认插槽) -->
     <div class="box" ref="target">
@@ -24,11 +14,7 @@
         <!-- 要写成 -index -->
         <!-- -0 * 1240 =  第一页-->
         <!-- -1 * 1240 = -1240 向左偏移 到第二页-->
-        <ul
-          class="list"
-          v-if="brands.length"
-          :style="{ transform: `translateX(${-index * 1240}px)` }"
-        >
+        <ul class="list" v-if="brands.length" :style="{ transform: `translateX(${-index * 1240}px)` }">
           <li v-for="item in brands" :key="item.id">
             <RouterLink to="/">
               <img :src="item.picture" alt="" />
@@ -38,15 +24,7 @@
         <!-- 没有数据时展示骨架屏效果 -->
         <div v-else class="skeleton">
           <!-- 每次展示5张图片需要渲染五次 -->
-          <XtxSkeleton
-            class="item"
-            v-for="i in 5"
-            :key="i"
-            animated
-            bg="#e4e4e4"
-            width="240px"
-            height="305px"
-          />
+          <XtxSkeleton class="item" v-for="i in 5" :key="i" animated bg="#e4e4e4" width="240px" height="305px" />
         </div>
       </Transition>
     </div>

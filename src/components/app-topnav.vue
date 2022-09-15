@@ -5,9 +5,10 @@
         <!-- token存在,展示登录状态 -->
         <template v-if="profile.token">
           <li>
-            <a href="javascript:;"
-              ><i class="iconfont icon-user"></i>{{ profile.account }}</a
-            >
+            <a href="javascript:;">
+              <i class="iconfont icon-user"></i>
+              {{ profile.account }}
+            </a>
           </li>
           <li><a href="javascript:;">退出登录</a></li>
         </template>

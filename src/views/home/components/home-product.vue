@@ -6,12 +6,7 @@
       <template v-slot:right>
         <!-- 副标题 -->
         <div class="sub">
-          <RouterLink
-            :to="`/category/sub/${sub.id}`"
-            v-for="sub in cate.children"
-            :key="sub.id"
-            >{{ sub.name }}</RouterLink
-          >
+          <RouterLink :to="`/category/sub/${sub.id}`" v-for="sub in cate.children" :key="sub.id">{{ sub.name }}</RouterLink>
         </div>
         <!-- 查看更多 -->
         <XtxMore :path="`category/${cate.id}`" />

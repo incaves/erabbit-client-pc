@@ -1,17 +1,12 @@
 <template>
   <ul class="app-header-nav">
-    <li class="home"><RouterLink to="/">首页</RouterLink></li>
-    <li
-      v-for="item in list"
-      :key="item.id"
-      @mousemove="show(item)"
-      @mouseleave="hide(item)"
-    >
+    <li class="home">
+      <RouterLink to="/">首页</RouterLink>
+    </li>
+    <li v-for="item in list" :key="item.id" @mousemove="show(item)" @mouseleave="hide(item)">
       <!-- 一级分类 -->
       <!-- 绑定hide-click事件是为了点击后自动隐藏二级分类 -->
-      <RouterLink @click="hide(item)" :to="`/category/${item.id}`">{{
-        item.name
-      }}</RouterLink>
+      <RouterLink @click="hide(item)" :to="`/category/${item.id}`">{{item.name}}</RouterLink>
       <!-- 当数据中open为true时显示 -->
       <div class="layer" :class="{ open: item.open }">
         <ul>

@@ -1,7 +1,9 @@
 <template>
   <HomePanel title="最新专题">
     <!-- 右侧插槽是查看更多 -->
-    <template v-slot:right><XtxMore /></template>
+    <template v-slot:right>
+      <XtxMore />
+    </template>
     <!-- 默认插槽是面板内容 -->
     <div class="special-list" ref="target">
       <div class="special-item" v-for="item in specoalList" :key="item.id">
@@ -21,15 +23,9 @@
         </RouterLink>
         <div class="foot">
           <!-- 收藏点赞喜欢 -->
-          <span class="like"
-            ><i class="iconfont icon-hart1"></i>{{ item.collectNum }}</span
-          >
-          <span class="view"
-            ><i class="iconfont icon-see"></i>{{ item.viewNum }}</span
-          >
-          <span class="reply"
-            ><i class="iconfont icon-message"></i>{{ item.replyNum }}</span
-          >
+          <span class="like"><i class="iconfont icon-hart1"></i>{{ item.collectNum }}</span>
+          <span class="view"><i class="iconfont icon-see"></i>{{ item.viewNum }}</span>
+          <span class="reply"><i class="iconfont icon-message"></i>{{ item.replyNum }}</span>
         </div>
       </div>
     </div>

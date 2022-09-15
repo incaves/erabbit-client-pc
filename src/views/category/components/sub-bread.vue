@@ -4,13 +4,9 @@
   <!-- 动画包裹的是二级分类 -->
   <XtxBread>
     <XtxBreadItem to="/">首页</XtxBreadItem>
-    <XtxBreadItem v-if="category.top" :to="`/category/${category.top.id}`">{{
-      category.top.name
-    }}</XtxBreadItem>
+    <XtxBreadItem v-if="category.top" :to="`/category/${category.top.id}`">{{category.top.name}}</XtxBreadItem>
     <Transition name="fade-right">
-      <XtxBreadItem v-if="category.sub" :key="category.sub.id">{{
-        category.sub.name
-      }}</XtxBreadItem>
+      <XtxBreadItem v-if="category.sub" :key="category.sub.id">{{category.sub.name}}</XtxBreadItem>
     </Transition>
   </XtxBread>
 </template>

@@ -8,11 +8,7 @@
     </div>
     <!-- 右侧小图 固定是5个 -->
     <ul class="small">
-      <li
-        v-for="(img, i) in images"
-        :key="img"
-        :class="{ active: i === currIndex }"
-      >
+      <li v-for="(img, i) in images" :key="img" :class="{ active: i === currIndex }">
         <img @mouseenter="currIndex = i" :src="img" alt="" />
       </li>
     </ul>

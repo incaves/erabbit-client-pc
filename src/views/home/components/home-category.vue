@@ -2,32 +2,17 @@
   <div class="home-category" @mouseleave="categoryId = null">
     <ul class="menu">
       <!-- 高亮效果 -->
-      <li
-        v-for="item in menuList"
-        :key="item.id"
-        @mouseenter="categoryId = item.id"
-        :class="{ active: categoryId === item.id }"
-      >
+      <li v-for="item in menuList" :key="item.id" @mouseenter="categoryId = item.id" :class="{ active: categoryId === item.id }">
         <!-- 一级分类 -->
         <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         <!-- 二级分类 数据可能不存在,判断下 -->
         <template v-if="item.children">
-          <router-link
-            v-for="sub in item.children"
-            :key="sub.id"
-            :to="`/category/sub/${sub.id}`"
-            >{{ sub.name }}</router-link
-          >
+          <router-link v-for="sub in item.children" :key="sub.id" :to="`/category/sub/${sub.id}`">{{ sub.name }}</router-link>
         </template>
         <!-- 没有数据时,展示骨架屏效果 -->
         <template v-else>
           <!-- 两个骨架屏代表两个子分类 -->
-          <XtxSkeleton
-            width="60px"
-            height="22px"
-            bg="rgba(255,255,255,0.2)"
-            style="margin-right: 5px"
-          />
+          <XtxSkeleton width="60px" height="22px" bg="rgba(255,255,255,0.2)" style="margin-right: 5px" />
           <XtxSkeleton width="60px" height="22px" bg="rgba(255,255,255,0.2)" />
         </template>
       </li>
@@ -74,22 +59,22 @@
 </template>
 
 <script>
-import { computed, reactive, ref } from "vue";
-import { useStore } from "vuex";
-import { findBrand } from "@/api/home";
+import { computed, reactive, ref } from 'vue'
+import { useStore } from 'vuex'
+import { findBrand } from '@/api/home'
 export default {
-  name: "HomeCategory",
-  setup() {
-    const store = useStore(); // 初始化Vuex
+  name: 'HomeCategory',
+  setup () {
+    const store = useStore() // 初始化Vuex
     // 使用的数据根据分类的数量
     // 九个分类 + 一个品牌
     // <品牌数据>
     const brand = reactive({
-      id: "brand",
-      name: "品牌",
-      children: [{ id: "brand-chilren", name: "品牌推荐" }],
-      brands: [], // 品牌列表
-    });
+      id: 'brand',
+      name: '品牌',
+      children: [{ id: 'brand-chilren', name: '品牌推荐' }],
+      brands: [] // 品牌列表
+    })
     // <左侧分类数据> 一共是九个
     const menuList = computed(() => {
       // 左侧分类只需要两个子分类,需要遍历截取下
@@ -100,32 +85,32 @@ export default {
           name: item.name, // 获取到name
           // 防止不存在的情况,判断下
           children: item.children && item.children.slice(0, 2), // 获取到children,但只截取两个
-          goods: item.goods, // 获取到goods
-        };
-      });
-      list.push(brand); // 将品牌数据追加到list数组中(末尾)
-      return list;
-    });
+          goods: item.goods // 获取到goods
+        }
+      })
+      list.push(brand) // 将品牌数据追加到list数组中(末尾)
+      return list
+    })
     // 弹层 -- 分类数据
-    const categoryId = ref(null); // 记录鼠标滑入那个分类的id
+    const categoryId = ref(null) // 记录鼠标滑入那个分类的id
     // 根据鼠标滑入的id获取对应的数据
     const currCategory = computed(() => {
       // 根据categoryId记录的id,向menuList找对应的数据
-      return menuList.value.find((item) => item.id === categoryId.value);
-    });
+      return menuList.value.find((item) => item.id === categoryId.value)
+    })
     // 弹层 -- 品牌数据
     // 获取品牌独有的数据
     findBrand().then((res) => {
       // 把获取到品牌数据赋值给brand中的brands数组
-      brand.brands = res.result;
-    });
+      brand.brands = res.result
+    })
     return {
       menuList,
       categoryId,
-      currCategory,
-    };
-  },
-};
+      currCategory
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">

@@ -1,59 +1,29 @@
 <template>
   <div class="sub-sort">
     <div class="sort">
-      <a
-        :class="{ active: sortParams.sortField === null }"
-        @click="changeSort(null)"
-        href="javascript:;"
-        >默认排序</a
-      >
-      <a
-        :class="{ active: sortParams.sortField === 'publishTime' }"
-        @click="changeSort('publishTime')"
-        href="javascript:;"
-        >最新商品</a
-      >
-      <a
-        :class="{ active: sortParams.sortField === 'orderNum' }"
-        @click="changeSort('orderNum')"
-        href="javascript:;"
-        >最高人气</a
-      >
-      <a
-        :class="{ active: sortParams.sortField === 'evaluateNum' }"
-        @click="changeSort('evaluateNum')"
-        href="javascript:;"
-        >评论最多</a
-      >
+      <a :class="{ active: sortParams.sortField === null }" @click="changeSort(null)" href="javascript:;">默认排序</a>
+      <a :class="{ active: sortParams.sortField === 'publishTime' }" @click="changeSort('publishTime')" href="javascript:;">最新商品</a>
+      <a :class="{ active: sortParams.sortField === 'orderNum' }" @click="changeSort('orderNum')" href="javascript:;">最高人气</a>
+      <a :class="{ active: sortParams.sortField === 'evaluateNum' }" @click="changeSort('evaluateNum')" href="javascript:;">评论最多</a>
       <a @click="changeSort('price')" href="javascript:;">
         价格排序
         <!-- 正序 -->
-        <i
-          class="arrow up"
-          :class="{
+        <i class="arrow up" :class="{
             active:
               sortParams.sortField === 'price' &&
               sortParams.sortMethod == 'asc',
-          }"
-        />
+          }" />
         <!-- 倒序 -->
-        <i
-          class="arrow down"
-          :class="{
+        <i class="arrow down" :class="{
             active:
               sortParams.sortField === 'price' &&
               sortParams.sortMethod == 'desc',
-          }"
-        />
+          }" />
       </a>
     </div>
     <div class="check">
-      <XtxCheckbox @change="changeCheck" v-model="sortParams.inventory"
-        >仅显示有货商品</XtxCheckbox
-      >
-      <XtxCheckbox @change="changeCheck" v-model="sortParams.onlyDiscount"
-        >仅显示特惠商品</XtxCheckbox
-      >
+      <XtxCheckbox @change="changeCheck" v-model="sortParams.inventory">仅显示有货商品</XtxCheckbox>
+      <XtxCheckbox @change="changeCheck" v-model="sortParams.onlyDiscount">仅显示特惠商品</XtxCheckbox>
     </div>
   </div>
 </template>
