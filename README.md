@@ -91,6 +91,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                     goods-relevant.vue -- 商品推荐
                     goods-sales.vue    -- 商品信息(放大镜图片预览下的信息,静态页面)
                     goods-name.vue     -- 商品逆袭(右侧商品信息)
+                    goods-sku.vue      -- 规格选择组件(颜色,尺寸..)
             home   -- 首页
                 components
                     home-category.vue -- 首页左侧侧边栏

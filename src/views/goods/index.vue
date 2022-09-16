@@ -16,7 +16,10 @@
           <GoodsSales />
         </div>
         <div class="spec">
+          <!-- 商品信息 -->
           <GoodsName :goods="goods" />
+          <!-- 规格 -->
+          <GoodsSku :goods="goods" />
         </div>
       </div>
       <!-- 商品推荐 -->
@@ -41,6 +44,7 @@ import GoodsRelevant from './components/goods-relevant'
 import GoodsImage from './components/goods-image'
 import GoodsSales from './components/goods-sales'
 import GoodsName from './components/goods-name'
+import GoodsSku from './components/goods-sku'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { findGoods } from '@/api/product'
@@ -50,7 +54,8 @@ export default {
     GoodsRelevant,
     GoodsImage,
     GoodsSales,
-    GoodsName
+    GoodsName,
+    GoodsSku
   },
   setup () {
     // 获取商品详情
