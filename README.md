@@ -60,6 +60,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                 xtx-bread.vue     -- 面包屑(函数式组件使用render函数渲染模版)
                 xtx-bread-item.vue -- 单个面包屑组件(参考ElementUi)
                 xtx-infinite-loading.vue -- 无限加载组件(有数据加载时展示 加载中..)(没有数据时 展示: 没有更多了..)
+                xtx-city.vue      -- 城市组件(选择地址)
                 index.js          -- 注册全局插件(图片懒加载,批量注册组件)
     hooks          -- 全局方法(全局复用方法)
     router         -- 路由
@@ -88,6 +89,8 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
               components 
                     goods-image.vue    -- 商品图片预览区域(左侧大图和右侧五个小图)
                     goods-relevant.vue -- 商品推荐
+                    goods-sales.vue    -- 商品信息(放大镜图片预览下的信息,静态页面)
+                    goods-name.vue     -- 商品逆袭(右侧商品信息)
             home   -- 首页
                 components
                     home-category.vue -- 首页左侧侧边栏
@@ -177,4 +180,12 @@ XtxBreadItem 是单个面包屑
 参考elementui的做法  
 可以多次复用,也可以运用多级分类,而且第一个分类的值是首页时固定的
 面包屑的动画效果,如果加上mode属性,会使数据丢失,还未解决  
+```
+### vueuse
+```javascript
+useWindowScroll   <吸顶效果 没有使用>
+useVModel         <父子组件双向绑定>
+useMouseInElement <用于放大镜效果>
+useIntersectionObserver <监听元素是否进入可视区>
+onClickOutside <监听元素外部的点击,城市选择框点击其他位置关闭> 
 ```
