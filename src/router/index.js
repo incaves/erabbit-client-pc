@@ -4,6 +4,7 @@ import SubCategory from '@/views/category/sub'
 const Layout = () => import('@/views/Layout')
 const Home = () => import('@/views/home/index')
 const Goods = () => import('@/views/goods/index')
+const Login = () => import('@/views/login/index')
 const routes = [
   // 一级路由容器
   {
@@ -19,6 +20,12 @@ const routes = [
       // 商品详情
       { path: '/product/:id', component: Goods }
     ]
+  },
+  // 一级路由容器
+  // 整个页面都会变
+  {
+    path: '/login',
+    component: Login
   }
 ]
 // Vue2 = new VueRouter({})

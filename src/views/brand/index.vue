@@ -4,10 +4,9 @@
 
 <script>
 export default {
-  name: "",
-  setup() {},
-};
+  name: '',
+  setup () {}
+}
 </script>
 
 <style lang="less" scoped></style>
->

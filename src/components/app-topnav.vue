@@ -10,11 +10,13 @@
               {{ profile.account }}
             </a>
           </li>
-          <li><a href="javascript:;">退出登录</a></li>
+          <li><a href="javascript:;" @click="logout()">退出登录</a></li>
         </template>
         <!-- token不存在,展示未登录的状态 -->
         <template v-else>
-          <li><a href="javascript:;">请先登录</a></li>
+          <li>
+            <router-link to="/login">请先登录</router-link>
+          </li>
           <li><a href="javascript:;">免费注册</a></li>
         </template>
         <li><a href="javascript:;">我的订单</a></li>
@@ -31,6 +33,7 @@
 <script>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   name: 'AppTopnav',
   setup () {
@@ -39,8 +42,16 @@ export default {
     const profile = computed(() => {
       return store.state.user.profile // 获取到用户信息
     })
+    // 退出登录
+    const router = useRouter()
+    const logout = () => {
+      // Vuex用户信息为空,并且本地存储也同时为空
+      store.commit('user/setUser', {})
+      router.push('/login')
+    }
     return {
-      profile
+      profile,
+      logout
     }
   }
 }

@@ -53,6 +53,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
         app-footer.vue -- 底部
         app-header-nav.vue -- 头部和滑动吸顶效果用的是同一种方式,封装成一个组件
         app-header-sticky.vue -- 吸顶头部
+        app-member-aside.vue  -- 个人中心左侧菜单
         library    -- 全局组件插件
                 xtx-skeleton.vue  -- 骨架屏组件 (未加载成功时显示,类似于Vant中的骨架屏,可以对其设置宽高背景等样式),
                 xtx-carousel.vue  -- 轮播图组件
@@ -63,6 +64,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                 xtx-city.vue      -- 城市组件(选择地址)
                 index.js          -- 注册全局插件(图片懒加载,批量注册组件)
     hooks          -- 全局方法(全局复用方法)
+    mock           -- 模拟数据
     router         -- 路由
     store          -- Vuex
         modules    -- 模块化
@@ -72,6 +74,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
         index.js   -- Vuex
     utils          -- 工具
         request.js -- 封装请求方法
+        vee-validate-schema.js -- 表单校验规则
     vender         -- 第三方Js
     views          -- 路由页面
             Layout.vue -- 布局容器
@@ -110,6 +113,11 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                 home -- 个人中心首页
                 order -- 订单管理
             search -- 搜索
+            login  -- 登录
+                components
+                     login-form.vue   -- 登录框的表单组件
+                     login-header.vue     -- 登录页头部
+                     login-footer.vue     -- 登录页底部
     App.vue          -- 根组件
     main.js          -- 入口文件
 .browserslistrc    -- 在不同前端工具之间公用目标浏览器和node版本的配置文件,作用是设置兼容性
