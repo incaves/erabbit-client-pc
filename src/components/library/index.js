@@ -8,6 +8,7 @@
 // import XtxBread from "./xtx-bread.vue";
 // import XtxBreadItem from "./xtx-bread-item.vue";
 import defaultImg from '@/assets/images/200.png'
+// import Message from './Message'
 // --批量注册组件
 // 第一个参数目录路径
 // 第二个参数是否加载子目录
@@ -39,6 +40,8 @@ export default {
     })
     // 挂载全局指令
     defineDirective(app) // 传递app
+    // 挂载原型
+    // app.config.globalProperties.$messgae = Message
   }
 }
 // 挂载全局指令

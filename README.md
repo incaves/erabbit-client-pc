@@ -41,6 +41,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
         category.js  -- 分类相关api请求
         home.js      -- 首页相关api请求
         product.js   -- 商品详情相关api请求
+        user.js      -- 用户相关的api请求
     assets           -- 放置静态文件的目录
         images     -- 图片
         style      -- less预处理器脚本
@@ -54,6 +55,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
         app-header-nav.vue -- 头部和滑动吸顶效果用的是同一种方式,封装成一个组件
         app-header-sticky.vue -- 吸顶头部
         app-member-aside.vue  -- 个人中心左侧菜单
+        Message.js -- 消息提示(将XtxMessage组件,设置为函数式调用)
         library    -- 全局组件插件
                 xtx-skeleton.vue  -- 骨架屏组件 (未加载成功时显示,类似于Vant中的骨架屏,可以对其设置宽高背景等样式),
                 xtx-carousel.vue  -- 轮播图组件
@@ -62,6 +64,7 @@ src                -- 源文件目录,编写的代码基本都在这个目录下
                 xtx-bread-item.vue -- 单个面包屑组件(参考ElementUi)
                 xtx-infinite-loading.vue -- 无限加载组件(有数据加载时展示 加载中..)(没有数据时 展示: 没有更多了..)
                 xtx-city.vue      -- 城市组件(选择地址)
+                xtx-message.vue   -- 消息提示组件(添加成功,登录成功时,登录失败,警告等提示),注意:没有挂载到原型
                 index.js          -- 注册全局插件(图片懒加载,批量注册组件)
     hooks          -- 全局方法(全局复用方法)
     mock           -- 模拟数据
@@ -147,6 +150,7 @@ home-panel.vue 容器 标题 内容
 ```
 ## 复习Vue动画
 ```javascript
+一个元素显示或隐藏时,才可以触发动画
 使用tranistion组件实现动画,一个元素或者组件的(显示/隐藏,创建/移除)
 进入
 进入前 v-enter (v-enter-from-Vue3)
@@ -197,4 +201,13 @@ useVModel         <父子组件双向绑定>
 useMouseInElement <用于放大镜效果>
 useIntersectionObserver <监听元素是否进入可视区>
 onClickOutside <监听元素外部的点击,城市选择框点击其他位置关闭> 
+```
+### 组件实例
+```javascript
+如果想在组合式API中使用实例
+注意:此时已挂载到原型的基础上 app.config.globalProperties.$messgae = Message
+const { proxy } = getCurrentInstance()
+proxy.$message()
+------ 
+proxy = this  相同的意思
 ```
