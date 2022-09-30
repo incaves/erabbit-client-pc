@@ -8,24 +8,46 @@
         <i class="iconfont icon-msg"></i> 使用短信登录
       </a>
     </div>
-    <Form class="form" :validation-schema="Myschema" autocomplete="off" v-slot="{errors}" ref="formCom">
+    <Form
+      class="form"
+      :validation-schema="Myschema"
+      autocomplete="off"
+      v-slot="{ errors }"
+      ref="formCom"
+    >
       <!-- 账号登录 -->
       <template v-if="isMsgLogin === false">
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-user"></i>
-            <Field :class="{error:errors.account}" name="account" v-model="form.account" type="text" placeholder="请输入用户名或手机号" />
+            <Field
+              :class="{ error: errors.account }"
+              name="account"
+              v-model="form.account"
+              type="text"
+              placeholder="请输入用户名或手机号"
+            />
           </div>
           <!-- 错误提示 -->
-          <div class="error" v-if="errors.account"><i class="iconfont icon-warning" />{{errors.account}}</div>
+          <div class="error" v-if="errors.account">
+            <i class="iconfont icon-warning" />{{ errors.account }}
+          </div>
         </div>
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-lock"></i>
-            <Field :class="{error:errors.password}" v-model="form.password" name="password" type="password" placeholder="请输入密码" />
+            <Field
+              :class="{ error: errors.password }"
+              v-model="form.password"
+              name="password"
+              type="password"
+              placeholder="请输入密码"
+            />
           </div>
           <!-- 错误提示 -->
-          <div class="error" v-if="errors.password"><i class="iconfont icon-warning" />{{errors.password}}</div>
+          <div class="error" v-if="errors.password">
+            <i class="iconfont icon-warning" />{{ errors.password }}
+          </div>
         </div>
       </template>
       <!-- 验证码登录 -->
@@ -33,19 +55,37 @@
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-user"></i>
-            <Field :class="{error:errors.mobile}" v-model="form.mobile" name="mobile" type="text" placeholder="请输入手机号" />
+            <Field
+              :class="{ error: errors.mobile }"
+              v-model="form.mobile"
+              name="mobile"
+              type="text"
+              placeholder="请输入手机号"
+            />
           </div>
           <!-- 错误提示 -->
-          <div class="error" v-if="errors.mobile"><i class="iconfont icon-warning" />{{errors.mobile}}</div>
+          <div class="error" v-if="errors.mobile">
+            <i class="iconfont icon-warning" />{{ errors.mobile }}
+          </div>
         </div>
         <div class="form-item">
           <div class="input">
             <i class="iconfont icon-code"></i>
-            <Field :class="{error:errors.code}" v-model="form.code" name="code" type="text" placeholder="请输入验证码" />
-            <span class="code">发送验证码</span>
+            <Field
+              :class="{ error: errors.code }"
+              v-model="form.code"
+              name="code"
+              type="text"
+              placeholder="请输入验证码"
+            />
+            <span class="code" @click="send()">{{
+              time === 0 ? "发送验证码" : `${time}后发送`
+            }}</span>
           </div>
           <!-- 错误提示 -->
-          <div class="error" v-if="errors.code"><i class="iconfont icon-warning" />{{errors.code}}</div>
+          <div class="error" v-if="errors.code">
+            <i class="iconfont icon-warning" />{{ errors.code }}
+          </div>
         </div>
       </template>
       <div class="form-item">
@@ -58,12 +98,17 @@
           <a href="javascript:;">《服务条款》</a>
         </div>
         <!-- 错误提示 -->
-        <div class="error" v-if="errors.isAgree"><i class="iconfont icon-warning" />{{errors.isAgree}}</div>
+        <div class="error" v-if="errors.isAgree">
+          <i class="iconfont icon-warning" />{{ errors.isAgree }}
+        </div>
       </div>
       <a href="javascript:;" class="btn" @click="login()">登录</a>
     </Form>
     <div class="action">
-      <img src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png" alt="" />
+      <img
+        src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
+        alt=""
+      />
       <div class="url">
         <a href="javascript:;">忘记密码</a>
         <a href="javascript:;">免费注册</a>
@@ -72,13 +117,18 @@
   </div>
 </template>
 <script>
-import { reactive, ref, watch } from 'vue'
+import { onUnmounted, reactive, ref, watch } from 'vue'
 import { Form, Field } from 'vee-validate'
 import schema from '@/utils/vee-validate-schema'
 import Message from '@/components/library/Message'
-import { userAccountLogin } from '@/api/user'
+import {
+  userAccountLogin,
+  userMobileLogin,
+  userMobileLoginMsg
+} from '@/api/user'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
+import { useIntervalFn } from '@vueuse/core'
 export default {
   name: 'LoginForm',
   components: {
@@ -121,45 +171,96 @@ export default {
     const route = useRoute()
     const router = useRouter()
     const login = async () => {
-      // 点击登录按钮,validate会做整体校验(返回的是一个Promise)
+      // 整体校验
       const valid = await formCom.value.validate()
       if (valid) {
-        // 校验通过
-        const { account, password } = form // 结构出账号和密码
-        userAccountLogin({ account, password })
-          .then((res) => {
-            // 成功
-            // 结构出用户的信息,存储于Vuex中
-            const { id, account, nickname, avatar, token, mobile } = res.result
-            // 提交给Vuex
-            store.commit('user/setUser', {
-              id,
-              account,
-              nickname,
-              avatar,
-              token,
-              mobile
-            })
-            // 从那个页面来的,重定向到那个页面(request.js已处理),不存在的话直接跳转到首页
-            router.push(route.query.redirectUrl || '/')
-            // 消息提示
-            Message({ type: 'success', text: '登录成功' })
+        // 发送请求
+        let data = null
+        try {
+          if (isMsgLogin.value) {
+            // 短信登录
+            const { mobile, code } = form
+            data = await userMobileLogin({ mobile, code })
+            console.log(data)
+          } else {
+            // 帐号登录
+            const { account, password } = form
+            data = await userAccountLogin({ account, password })
+            console.log(form.account, password)
+            console.log(data)
+          }
+        } catch (err) {
+          Message({
+            type: 'error',
+            text: err.response.data.message || '登录失败'
           })
-          .catch((err) => {
-            // 失败
-            if (err.response.data) {
-              // 消息提示
-              Message({
-                type: 'error',
-                text: err.response.data.message || '登录失败'
-              })
-            }
-          })
-      } else {
-        // 短信登录
+        }
+        console.log(data)
+        // 成功
+        // 1. 存储信息
+        const { id, account, nickname, avatar, token, mobile } = data.result
+        store.commit('user/setUser', {
+          id,
+          account,
+          nickname,
+          avatar,
+          token,
+          mobile
+        })
+        // 2. 提示
+        Message({ type: 'success', text: '登录成功' })
+        // 3. 跳转
+        router.push(route.query.redirectUrl || '/')
       }
     }
-    return { isMsgLogin, form, Myschema, login, formCom }
+    // 倒计时
+    // pause = 暂停
+    // resume = 开启
+    // useIntervalFn(回掉函数,执行间隔,是否立即开启)
+    const time = ref(0)
+    const { pause, resume } = useIntervalFn(
+      () => {
+        time.value-- // 倒计时
+        if (time.value <= 0) {
+          // 小于0
+          pause() // 暂停
+        }
+      },
+      1000,
+      false
+    )
+    // 发送验证码的函数
+    const send = async () => {
+      // 1.校验手机号(调用检验规则对象)
+      const valid = Myschema.mobile(form.mobile)
+      if (valid === true) {
+        // 校验通过
+        // 没有倒计时,才可以发送请求
+        if (time.value === 0) {
+          await userMobileLoginMsg(form.mobile)
+          Message({ type: 'success', text: '发送成功', time: 3000 })
+          time.value = 60 // 发送成功时设置为60
+          resume() // 开启定时器
+        }
+      } else {
+        // 校验失败
+        // 使用vee的错误函数显示错误信息对象
+        formCom.value.setFieldError('mobile', valid)
+      }
+    }
+    // 销毁组件时,停止定时器
+    onUnmounted(() => {
+      pause()
+    })
+    return {
+      isMsgLogin,
+      form,
+      Myschema,
+      login,
+      formCom,
+      send,
+      time
+    }
   }
 }
 </script>

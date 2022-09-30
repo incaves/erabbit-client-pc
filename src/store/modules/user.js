@@ -17,6 +17,7 @@ export default {
     // 修改用户信息
     setUser (state, payload) {
       state.profile = payload
+      console.log(state.profile)
     }
   }
 }

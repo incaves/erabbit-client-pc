@@ -201,6 +201,7 @@ useVModel         <父子组件双向绑定>
 useMouseInElement <用于放大镜效果>
 useIntersectionObserver <监听元素是否进入可视区>
 onClickOutside <监听元素外部的点击,城市选择框点击其他位置关闭> 
+useIntervalFn  <用于发送验证码的60秒倒计时>
 ```
 ### 组件实例
 ```javascript
